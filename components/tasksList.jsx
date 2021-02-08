@@ -49,7 +49,6 @@ export default function TasksList() {
         color={color}
         onPress={() => {
           addTask(taskTitle);
-          console.log(taskTitle);
           setTitle("");
         }}
         styles={styles.button}
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   list: {
+    flex: 1,
     alignItems: "stretch",
     paddingHorizontal: 20,
   },

@@ -15,7 +15,8 @@ export const tasksContext = createContext(defaultTasksValue);
 export default function TasksProvider({ children }) {
   let [tasks, setTasks] = useState(defaultTasksValue.tasks);
 
-  const addTask = (title) => setTasks([...tasks, { title, id: generateUUID() }]);
+  const addTask = (title) =>
+    setTasks([...tasks, { title, id: generateUUID() }]);
 
   const removeTask = (id) =>
     setTasks((prevTasks) => prevTasks.filter((item) => item.id != id));
