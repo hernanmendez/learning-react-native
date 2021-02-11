@@ -1,28 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import TasksList from './components/tasksList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+import { DarkTheme } from '@react-navigation/native';
+
 import TasksProvider from "./context/tasksContext"
-import { SafeAreaView } from "react-native-safe-area-context"
+import CommentsProvider from "./context/commentsContext"
+
+import Tasks from './screens/tasks';
+import Comments from "./screens/comments"
+
+const Tab = createMaterialTopTabNavigator();
+
+const MyTheme = {
+  dark: true,
+  colors: {
+    ...DarkTheme.colors,
+    card: "#141414",
+    primary: '#404040',
+    background: '#292929',
+    border: '#525252',
+    notification: '#525252',
+  },
+};
 
 export default function App() {
   return (
-    <TasksProvider>
-      <StatusBar style="light" />
-      <SafeAreaView style={styles.container}>
-        <TasksList />
-      </SafeAreaView>
-    </TasksProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ backgroundColor: "#141414" }}></SafeAreaView>
+      <TasksProvider>
+        <CommentsProvider>
+          <NavigationContainer theme={MyTheme}>
+            <Tab.Navigator>
+              <Tab.Screen name="Tasks" component={Tasks} />
+              <Tab.Screen name="Comments" component={Comments} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </CommentsProvider>
+      </TasksProvider>
+    </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#262626',
-    color: "white",
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: "100%",
-  },
-});

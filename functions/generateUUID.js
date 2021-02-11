@@ -34,7 +34,7 @@ export default function generateUUID() {
       uuid += concatBytes(bin, randomBytes[9]).toString(16)
     } else if (index !== 7 && index !== 9) {
       // 7 and 9 have already been added
-      if (value < 16) string += "0"
+      if (value < 16) uuid += "0"
       uuid += value.toString(16)
     }
   })
